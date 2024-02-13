@@ -14,3 +14,9 @@ router.get('/', async () => {
     hello: 'world',
   }
 })
+
+router
+  .group(() => {
+    router.post('/', '#controllers/cars_controller.create')
+  })
+  .prefix('cars')
