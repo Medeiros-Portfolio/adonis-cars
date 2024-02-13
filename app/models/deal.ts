@@ -1,29 +1,21 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column, hasOne } from '@adonisjs/lucid/orm'
-import Customer from './customer.js'
+import Vendor from './vendor.js'
 import type { HasOne } from '@adonisjs/lucid/types/relations'
+import Car from './car.js'
 
-export default class Car extends BaseModel {
+export default class Deal extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
-  @column()
-  declare brand: string
+  @hasOne(() => Vendor)
+  declare vendor_id: HasOne<typeof Vendor>
+
+  @hasOne(() => Car)
+  declare car_id: HasOne<typeof Car>
 
   @column()
-  declare model: string
-
-  @column()
-  declare year: number
-
-  @column()
-  declare price: number
-
-  @column()
-  declare mileage: number
-
-  @hasOne(() => Customer)
-  declare buyer: HasOne<typeof Customer>
+  declare profit: number
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
