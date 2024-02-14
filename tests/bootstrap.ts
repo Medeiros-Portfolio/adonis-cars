@@ -4,6 +4,7 @@ import app from '@adonisjs/core/services/app'
 import type { Config } from '@japa/runner/types'
 import { pluginAdonisJS } from '@japa/plugin-adonisjs'
 import testUtils from '@adonisjs/core/services/test_utils'
+import ace from '@adonisjs/core/services/ace'
 
 /**
  * This file is imported by the "bin/test.ts" entrypoint file
@@ -23,8 +24,13 @@ export const plugins: Config['plugins'] = [assert(), apiClient(), pluginAdonisJS
  * The teardown functions are executer after all the tests
  */
 export const runnerHooks: Required<Pick<Config, 'setup' | 'teardown'>> = {
-  setup: [],
-  teardown: [],
+  setup: [
+    () => ace.exec('boot:db-container', []) as unknown as Promise<void>,
+    () => new Promise<void>((resolve) => setTimeout(resolve, 2000)),
+    () => testUtils.db().truncate(),
+    () => testUtils.db().seed(),
+  ],
+  teardown: [() => ace.exec('terminate:db-container', []) as unknown as Promise<void>],
 }
 
 /**
@@ -32,7 +38,7 @@ export const runnerHooks: Required<Pick<Config, 'setup' | 'teardown'>> = {
  * Learn more - https://japa.dev/docs/test-suites#lifecycle-hooks
  */
 export const configureSuite: Config['configureSuite'] = (suite) => {
-  if (['browser', 'functional', 'e2e'].includes(suite.name)) {
+  if (['functional', 'unit'].includes(suite.name)) {
     return suite.setup(() => testUtils.httpServer().start())
   }
 }
