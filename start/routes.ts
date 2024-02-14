@@ -26,5 +26,12 @@ router
 router
   .group(() => {
     router.post('/', '#controllers/vendors_controller.create')
+    router.post('/signup', '#controllers/vendors_controller.addPassword')
   })
   .prefix('staff')
+
+router
+  .group(() => {
+    router.post('/login', '#controllers/sessions_controller.loginStaff')
+  })
+  .prefix('auth')
