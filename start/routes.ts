@@ -18,5 +18,6 @@ router.get('/', async () => {
 router
   .group(() => {
     router.post('/', '#controllers/cars_controller.create')
+    router.get('/', '#controllers/cars_controller.getAvailable')
   })
   .prefix('cars')
