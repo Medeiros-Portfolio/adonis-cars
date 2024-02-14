@@ -13,6 +13,9 @@ export default class Vendor extends BaseModel {
   @column()
   declare email: string
 
+  @column()
+  declare password: string
+
   @hasMany(() => Deal)
   declare deals: HasMany<typeof Deal>
 

@@ -1,9 +1,10 @@
 import { ResolvedPromiseType } from '../../types/index.js'
 import Car from '../models/car.js'
+import { createCarValidator } from '../validators/car.js'
 import { searchCarValidator } from '../validators/car_search.js'
 
 export default class InventoryService {
-  async addCar(car: Omit<Car, 'createdAt' | 'updatedAt' | 'id'>) {
+  async addCar(car: ResolvedPromiseType<typeof createCarValidator.validate>) {
     await Car.create(car)
   }
 
