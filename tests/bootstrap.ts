@@ -26,7 +26,6 @@ export const plugins: Config['plugins'] = [assert(), apiClient(), pluginAdonisJS
 export const runnerHooks: Required<Pick<Config, 'setup' | 'teardown'>> = {
   setup: [
     () => ace.exec('boot:db-container', []) as unknown as Promise<void>,
-    () => new Promise<void>((resolve) => setTimeout(resolve, 2000)),
     () => testUtils.db().truncate(),
     () => testUtils.db().seed(),
   ],

@@ -16,7 +16,7 @@ export default class BootDbContainer extends BaseCommand {
 
     this.animatedLog.update('Just one more second...')
 
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    await new Promise((resolve) => setTimeout(resolve, 3000))
   }
 
   async completed() {
