@@ -14,9 +14,7 @@ test.group('Validators create car', () => {
   test('shold throw an error if the car DTO is incomplete', async ({ assert }) => {
     const { brand, mileage, ...partialCarDTO } = cars.second
 
-    const secondResult = await createCarValidator.validate(partialCarDTO)
-
-    assert.deepEqual(secondResult, partialCarDTO)
+    assert.rejects(async () => await createCarValidator.validate(partialCarDTO))
   })
 
   test('should throw an error if the car DTO is invalid', async ({ assert }) => {
