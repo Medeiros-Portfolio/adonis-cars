@@ -1,5 +1,5 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import { createCarValidator } from '../validators/car.js'
+import { createCarValidator } from '../validators/create_car.js'
 import { inject } from '@adonisjs/core/container'
 import InventoryService from '../services/inventory_service.js'
 import { searchCarValidator } from '../validators/car_search.js'

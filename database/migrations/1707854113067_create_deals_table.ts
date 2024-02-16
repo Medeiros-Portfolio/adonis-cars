@@ -6,7 +6,12 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.integer('vendor_id').unsigned().references('id').inTable('vendors').onDelete('CASCADE')
+      table
+        .string('vendor_email')
+        .unsigned()
+        .references('email')
+        .inTable('vendors')
+        .onDelete('CASCADE')
       table.integer('car_id').unsigned().references('id').inTable('cars').onDelete('CASCADE')
       table.float('profit').notNullable()
 

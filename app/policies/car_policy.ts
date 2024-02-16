@@ -10,12 +10,6 @@ export default class CarPolicy extends BasePolicy {
   }
 
   async create(email: string): Promise<AuthorizerResponse> {
-    const isVendor = await this.employeeService.isVendor(email)
-
-    if (!isVendor) {
-      return true
-    }
-
-    return false
+    return this.employeeService.isVendor(email)
   }
 }
