@@ -9,9 +9,9 @@
 
 import router from '@adonisjs/core/services/router'
 
-router.get('/', async () => {
+router.get('/_info', async () => {
   return {
-    hello: 'world',
+    status: "I'm alive!",
   }
 })
 

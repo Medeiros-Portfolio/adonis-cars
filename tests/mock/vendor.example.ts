@@ -11,4 +11,8 @@ export const vendors = {
     name: 'Jack Daniels',
     email: 'jack.daniels@notarealemail.no',
   },
+  invalid: {
+    name: 123,
+    email: '@notarealemail.no',
+  },
 }
