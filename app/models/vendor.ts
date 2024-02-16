@@ -12,13 +12,13 @@ const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
 })
 
 export default class Vendor extends compose(BaseModel, AuthFinder) {
-  @column({ isPrimary: true })
+  @column()
   declare id: number
 
   @column()
   declare name: string
 
-  @column()
+  @column({ isPrimary: true })
   declare email: string
 
   @column()

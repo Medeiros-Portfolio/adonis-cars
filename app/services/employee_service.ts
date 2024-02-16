@@ -13,8 +13,12 @@ export default class EmployeeService {
   }
 
   async isVendor(email: string) {
-    const vendor = await Vendor.findOrFail(email)
-    return vendor instanceof Vendor
+    try {
+      await Vendor.findOrFail(email)
+      return true
+    } catch (error) {
+      return false
+    }
   }
 
   async addPassword(email: string, password: string) {
