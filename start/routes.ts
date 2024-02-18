@@ -7,6 +7,7 @@
 |
 */
 
+import { middleware } from '#start/kernel'
 import router from '@adonisjs/core/services/router'
 
 router.get('/_info', async () => {
@@ -17,7 +18,7 @@ router.get('/_info', async () => {
 
 router
   .group(() => {
-    router.post('/', '#controllers/cars_controller.create')
+    router.post('/', '#controllers/cars_controller.create').use(middleware.auth())
     router.get('/', '#controllers/cars_controller.getAvailable')
     router.get('/search', '#controllers/cars_controller.search')
   })

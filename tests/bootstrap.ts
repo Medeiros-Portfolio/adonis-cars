@@ -26,11 +26,11 @@ export const plugins: Config['plugins'] = [assert(), expect(), apiClient(), plug
  */
 export const runnerHooks: Required<Pick<Config, 'setup' | 'teardown'>> = {
   setup: [
-    () => ace.exec('boot:db-container', []) as unknown as Promise<void>,
+    () => ace.exec('boot:db', []) as unknown as Promise<void>,
     () => testUtils.db().truncate(),
     () => testUtils.db().seed(),
   ],
-  teardown: [() => ace.exec('terminate:db-container', []) as unknown as Promise<void>],
+  teardown: [() => ace.exec('terminate:db', []) as unknown as Promise<void>],
 }
 
 /**
