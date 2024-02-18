@@ -1,4 +1,3 @@
-import logger from '@adonisjs/core/services/logger'
 import { ResolvedPromiseType } from '../../types/index.js'
 import VendorNotFoundException from '../exceptions/vendor_not_found_exception.js'
 import Vendor from '../models/vendor.js'
