@@ -2,7 +2,7 @@ import { BaseCommand } from '@adonisjs/core/ace'
 import { execSync } from 'node:child_process'
 
 export default class TerminateDbContainer extends BaseCommand {
-  static commandName = 'terminate:db-container'
+  static commandName = 'terminate:db'
   static description = 'Terminate the database container'
 
   animatedLog = this.logger.await('Terminating the database container', {

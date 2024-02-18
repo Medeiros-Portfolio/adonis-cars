@@ -1,15 +1,7 @@
-import { cars } from '#tests/mock/car.example'
 import { test } from '@japa/runner'
 
-test.group('Routes cars', () => {
-  test('POST /', async ({ assert, client }) => {
-    const body = cars.first
-    const response = await client.post('/cars').json(body).send()
-
-    assert.equal(response.status(), 201)
-  })
-
-  test('GET /', async ({ assert, client }) => {
+test.group('GET /', () => {
+  test('should return cars with no buyer property', async ({ assert, client }) => {
     const response = await client.get('/cars').send()
     assert.equal(response.status(), 200)
 
@@ -21,7 +13,7 @@ test.group('Routes cars', () => {
     }
   })
 
-  test('GET /search', async ({ assert, client }) => {
+  test('should return cars matching the search query', async ({ assert, client }) => {
     const response = await client.get('/cars/search').qs({ brand: 'Toyota' }).send()
     assert.equal(response.status(), 200)
 
