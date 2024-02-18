@@ -6,7 +6,7 @@ export default class TerminateDbContainer extends BaseCommand {
   static description = 'Terminate the database container'
 
   animatedLog = this.logger.await('Terminating the database container', {
-    suffix: 'terminate:db-container',
+    suffix: 'terminate:db',
   })
 
   async run() {
