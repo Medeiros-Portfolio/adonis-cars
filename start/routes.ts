@@ -8,11 +8,17 @@
 */
 
 import { middleware } from '#start/kernel'
+import { Secret } from '@adonisjs/core/helpers'
+import app from '@adonisjs/core/services/app'
 import router from '@adonisjs/core/services/router'
 
 router.get('/_info', async () => {
+  const appInfo = app.config.get('app')
+  const dbInfo: any = app.config.get('database')
+  dbInfo.connections.postgres.connection.password = new Secret('')
   return {
-    status: "I'm alive!",
+    app: appInfo,
+    db: dbInfo,
   }
 })
 

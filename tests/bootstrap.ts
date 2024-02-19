@@ -33,11 +33,11 @@ export const plugins: Config['plugins'] = [
  */
 export const runnerHooks: Required<Pick<Config, 'setup' | 'teardown'>> = {
   setup: [
-    () => ace.exec('boot:db', []) as unknown as Promise<void>,
+    () => ace.exec('db:boot', []) as unknown as Promise<void>,
     () => testUtils.db().truncate(),
     () => testUtils.db().seed(),
   ],
-  teardown: [() => ace.exec('terminate:db', []) as unknown as Promise<void>],
+  teardown: [() => ace.exec('db:kill', []) as unknown as Promise<void>],
 }
 
 /**

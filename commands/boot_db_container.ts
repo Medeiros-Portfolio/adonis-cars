@@ -2,11 +2,11 @@ import { BaseCommand } from '@adonisjs/core/ace'
 import { execSync } from 'node:child_process'
 
 export default class BootDbContainer extends BaseCommand {
-  static commandName = 'boot:db'
-  static description = 'Start the database container for testing purposes'
+  static commandName = 'db:boot'
+  static description = 'Start the database docker container for testing purposes'
 
   animatedLog = this.logger.await('Starting the database container', {
-    suffix: 'boot:db-container',
+    suffix: 'db:boot',
   })
 
   async run() {
