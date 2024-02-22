@@ -1,9 +1,8 @@
-import { ResolvedPromiseType } from '../../types/index.js'
+import { AddCarDTO } from '#types/index'
 import Car from '../models/car.js'
-import { createCarValidator } from '../validators/create_car.js'
 
 export default class InventoryService {
-  async addCar(car: ResolvedPromiseType<typeof createCarValidator.validate>) {
+  async addCar(car: AddCarDTO) {
     await Car.create(car)
   }
 

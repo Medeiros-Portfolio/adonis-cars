@@ -1,10 +1,9 @@
-import { ResolvedPromiseType } from '../../types/index.js'
+import { CreateVendorDTO } from '#types/index'
 import VendorNotFoundException from '../exceptions/vendor_not_found_exception.js'
 import Vendor from '../models/vendor.js'
-import { createVendorValidator } from '../validators/create_vendor.js'
 
 export default class EmployeeService {
-  async create(employee: ResolvedPromiseType<typeof createVendorValidator.validate>) {
+  async create(employee: CreateVendorDTO) {
     await Vendor.create(employee)
   }
 

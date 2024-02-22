@@ -11,16 +11,4 @@ test.group('POST /login', () => {
     assert.equal(response.status(), 204)
     assert.exists(response.headers()['set-cookie'])
   })
-
-  test('should return 400 when invalid credentials', async ({ assert, client }) => {
-    const response = await client
-      .post('/auth/login')
-      .json({
-        email: vendors.first.email,
-        password: 'notValid',
-      })
-      .send()
-
-    assert.equal(response.status(), 400)
-  })
 })

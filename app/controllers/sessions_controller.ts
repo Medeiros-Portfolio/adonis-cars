@@ -9,7 +9,7 @@ export default class SessionsController {
     const vendor = await Vendor.verifyCredentials(email, password)
 
     if (!vendor) {
-      return bouncer.deny('Invalid credentials')
+      return bouncer.deny('Invalid credentials', 400)
     }
 
     await auth.use('staff').login(vendor)

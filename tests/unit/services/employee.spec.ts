@@ -40,12 +40,18 @@ test.group('Employee service', (group) => {
   })
 
   test('should add a password to a vendor', async ({ assert }) => {
+    const vendor = {
+      name: 'Test Vendor',
+      email: 'test@email.notreal',
+    }
+
+    await employeeService.create(vendor)
+
     assert.plan(1)
-    const email = vendors.first.email
     const password = 'password'
 
     assert.doesNotReject(async () => {
-      await employeeService.addPassword(email, password)
+      await employeeService.addPassword(vendor.email, password)
     })
   })
 })
