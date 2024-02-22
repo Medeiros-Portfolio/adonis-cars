@@ -4,10 +4,10 @@ import { vendors } from '../../tests/mock/vendor.example.js'
 
 export default class extends BaseSeeder {
   async run() {
-    const { first, second, third } = vendors
+    const { first, second } = vendors
     const MOCK_PASSWORD = 'password'
 
-    const validVendors = [first, second, third].map((vendor) => {
+    const validVendors = [first, second].map((vendor) => {
       return { ...vendor, password: MOCK_PASSWORD }
     })
 

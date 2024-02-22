@@ -20,7 +20,8 @@
       "#tests/*": ["./tests/*.js"],
       "#start/*": ["./start/*.js"],
       "#config/*": ["./config/*.js"],
-      "#mock/*": ["./tests/mock/*.js"]
+      "#mock/*": ["./tests/mock/*.js"],
+      "#types/*": ["./types/*.d.ts"]
     },
   },
 }

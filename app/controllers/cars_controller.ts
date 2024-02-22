@@ -3,7 +3,6 @@ import { createCarValidator } from '../validators/create_car.js'
 import { inject } from '@adonisjs/core/container'
 import InventoryService from '../services/inventory_service.js'
 import { searchCarValidator } from '../validators/car_search.js'
-import logger from '@adonisjs/core/services/logger'
 import EmployeeService from '#services/employee_service'
 
 @inject()
@@ -13,10 +12,8 @@ export default class CarsController {
     protected employeeService: EmployeeService
   ) {}
 
-  async create({ request, response, bouncer, session }: HttpContext) {
+  async create({ request, response, bouncer, session, logger }: HttpContext) {
     const user = session.get('auth_staff')
-
-    logger.info('User is %s', user)
 
     const isVendor = await this.employeeService.isVendor(user)
 

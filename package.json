@@ -30,7 +30,8 @@
     "#start/*": "./start/*.js",
     "#tests/*": "./tests/*.js",
     "#config/*": "./config/*.js",
-    "#mock/*": "./tests/mock/*.js"
+    "#mock/*": "./tests/mock/*.js",
+    "types/*": "./types/*.d.ts"
   },
   "devDependencies": {
     "@adonisjs/assembler": "^7.1.1",
@@ -59,6 +60,7 @@
     "@adonisjs/lucid": "^20.1.0",
     "@adonisjs/session": "^7.1.1",
     "@vinejs/vine": "^1.7.1",
+    "better-sqlite3": "^9.4.1",
     "luxon": "^3.4.4",
     "pg": "^8.11.3",
     "reflect-metadata": "^0.2.1"

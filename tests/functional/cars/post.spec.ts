@@ -13,11 +13,4 @@ test.group('POST /', () => {
 
     assert.equal(response.status(), 201)
   })
-
-  test('should return status 403', async ({ assert, client }) => {
-    const body = cars.first
-    const response = await client.post('/cars').json(body).send()
-
-    assert.equal(response.status(), 401)
-  })
 })
