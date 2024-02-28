@@ -8,6 +8,7 @@ export default class extends BaseSchema {
       table.increments('id')
       table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE')
       table.integer('store_id').unsigned().references('id').inTable('stores').onDelete('CASCADE')
+      table.integer('deal_id').unsigned().references('id').inTable('deals').onDelete('CASCADE')
       table.string('first_name').notNullable()
       table.string('last_name').notNullable()
       table.enum('gender', ['male', 'female', 'other']).notNullable()
