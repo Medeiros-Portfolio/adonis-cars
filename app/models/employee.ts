@@ -14,6 +14,9 @@ export default class Employee extends BaseModel {
   declare storeId: number
 
   @column()
+  declare dealId: number
+
+  @column()
   declare firstName: string
 
   @column()
