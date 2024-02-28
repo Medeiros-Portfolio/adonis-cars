@@ -22,9 +22,9 @@ export default class extends BaseSeeder {
           }),
       })
 
-      await deal.related('employee').save(employee)
-      await deal.related('customer').save(customer)
-      await deal.related('car').save(car)
+      await car.related('deal').save(deal)
+      await customer.related('deal').save(deal)
+      await employee.related('deal').save(deal)
     }
   }
 }

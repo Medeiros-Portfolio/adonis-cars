@@ -1,22 +1,18 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasOne } from '@adonisjs/lucid/orm'
-import Employee from '#models/employee'
-import type { HasOne } from '@adonisjs/lucid/types/relations'
-import Customer from '#models/customer'
-import Car from '#models/car'
+import { BaseModel, column } from '@adonisjs/lucid/orm'
 
 export default class Deal extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
-  @hasOne(() => Employee)
-  declare employee: HasOne<typeof Employee>
+  @column()
+  declare employeeId: number
 
-  @hasOne(() => Customer)
-  declare customer: HasOne<typeof Customer>
+  @column()
+  declare customerId: number
 
-  @hasOne(() => Car)
-  declare car: HasOne<typeof Car>
+  @column()
+  declare carId: number
 
   @column()
   declare pricePaid: number
