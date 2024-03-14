@@ -12,6 +12,10 @@ import { HttpContext } from '@adonisjs/core/http'
 import app from '@adonisjs/core/services/app'
 import router from '@adonisjs/core/services/router'
 
+router.get('/health', async ({ response }: HttpContext) => {
+  return response.noContent()
+})
+
 router
   .get('/info', async ({ response }: HttpContext) => {
     return response.json({
