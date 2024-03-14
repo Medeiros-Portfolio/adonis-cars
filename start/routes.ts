@@ -22,7 +22,7 @@ router
   })
   .use(
     middleware.auth({
-      guards: ['admin'],
+      guards: ['staff'],
     })
   )
 
