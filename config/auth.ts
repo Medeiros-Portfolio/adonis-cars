@@ -1,6 +1,7 @@
 import { defineConfig } from '@adonisjs/auth'
 import { InferAuthEvents, Authenticators } from '@adonisjs/auth/types'
 import { sessionGuard, sessionUserProvider } from '@adonisjs/auth/session'
+import { basicAuthGuard, basicAuthUserProvider } from '@adonisjs/auth/basic_auth'
 
 const authConfig = defineConfig({
   default: 'staff',
@@ -8,6 +9,11 @@ const authConfig = defineConfig({
     staff: sessionGuard({
       useRememberMeTokens: false,
       provider: sessionUserProvider({
+        model: () => import('#models/user'),
+      }),
+    }),
+    admin: basicAuthGuard({
+      provider: basicAuthUserProvider({
         model: () => import('#models/user'),
       }),
     }),

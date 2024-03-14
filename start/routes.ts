@@ -20,10 +20,15 @@ router
       info: app.info,
     })
   })
-  .use(middleware.auth())
+  .use(
+    middleware.auth({
+      guards: ['admin'],
+    })
+  )
 
 router
   .group(() => {
     router.post('/login', '#controllers/session_controller.login')
+    router.post('/logout', '#controllers/session_controller.logout')
   })
   .prefix('auth')

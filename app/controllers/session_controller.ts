@@ -15,4 +15,10 @@ export default class SessionController {
 
     response.noContent()
   }
+
+  async logout({ auth, response }: HttpContext) {
+    await auth.use('staff').logout()
+
+    response.noContent()
+  }
 }
