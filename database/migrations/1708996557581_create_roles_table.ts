@@ -6,12 +6,6 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table
-        .integer('employee_id')
-        .unsigned()
-        .references('id')
-        .inTable('employees')
-        .onDelete('CASCADE')
       table.string('title').notNullable()
       table.decimal('base_salary', 8, 2).notNullable()
 
