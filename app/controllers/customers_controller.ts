@@ -1,5 +1,6 @@
 // import type { HttpContext } from '@adonisjs/core/http'
 
+import { createCustomerAbility } from '#abilities/main'
 import CustomerService from '#services/customer_service'
 import { createCustomer } from '#validators/customer'
 import { inject } from '@adonisjs/core'
@@ -9,7 +10,11 @@ import { HttpContext } from '@adonisjs/core/http'
 export default class CustomersController {
   constructor(protected service: CustomerService) {}
 
-  async create({ request, response }: HttpContext) {
+  async create({ request, response, bouncer }: HttpContext) {
+    if (await bouncer.denies(createCustomerAbility)) {
+      return response.unauthorized({ message: 'You are not allowed to create a customer' })
+    }
+
     const body = request.body()
     const { firstName, lastName } = await createCustomer.validate(body)
 

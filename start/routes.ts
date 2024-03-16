@@ -7,6 +7,7 @@
 |
 */
 
+import { middleware } from '#start/kernel'
 import { HttpContext } from '@adonisjs/core/http'
 import router from '@adonisjs/core/services/router'
 
@@ -25,4 +26,5 @@ router
   .group(() => {
     router.post('/', '#controllers/customers_controller.create')
   })
+  .use(middleware.auth())
   .prefix('customer')
