@@ -28,3 +28,10 @@ router
   })
   .use(middleware.auth())
   .prefix('customer')
+
+router
+  .group(() => {
+    router.post('/', '#controllers/employees_controller.create')
+  })
+  .use(middleware.auth())
+  .prefix('employee')
