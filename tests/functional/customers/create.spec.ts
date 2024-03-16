@@ -1,6 +1,5 @@
 import Employee from '#models/employee'
 import User from '#models/user'
-import logger from '@adonisjs/core/services/logger'
 import { test } from '@japa/runner'
 
 test.group('Customers create', (group) => {
@@ -21,5 +20,29 @@ test.group('Customers create', (group) => {
       })
       .send()
     response.assertStatus(201)
+  })
+
+  test('should not create a customer without proper authotization', async ({ client }) => {
+    const response = await client
+      .post('/customer')
+      .json({
+        firstName: 'Jack',
+        lastName: 'Daniels',
+      })
+      .send()
+
+    response.assertStatus(401)
+  })
+
+  test('should not create a customer with invalid data', async ({ client }) => {
+    const response = await client
+      .post('/customer')
+      .loginAs(vendor)
+      .json({
+        firstName: 'Jack',
+      })
+      .send()
+
+    response.assertStatus(422)
   })
 })
