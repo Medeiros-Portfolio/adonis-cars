@@ -10,6 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Setup
-        run: npm install
+        run: npm install --production=false
       - name: Test
         run: node ace test
