@@ -12,4 +12,4 @@ jobs:
       - name: Setup
         run: npm install --production=false
       - name: Test
-        run: node ace test
+        run: npm test
