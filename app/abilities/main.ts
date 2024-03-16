@@ -12,12 +12,25 @@
 |
 */
 
+import Employee from '#models/employee'
+import Role from '#models/role'
+import User from '#models/user'
 import { Bouncer } from '@adonisjs/bouncer'
 
 /**
  * Delete the following ability to start from
  * scratch
  */
-export const editUser = Bouncer.ability(() => {
-  return true
+export const createCustomerAbility = Bouncer.ability(async (user: User) => {
+  const ALLOWED_ROLES = ['vendor', 'manager']
+
+  const employee = await Employee.findBy('user_id', user.id)
+
+  if (!employee) return false
+
+  const role = await Role.findOrFail(employee.roleId)
+
+  if (ALLOWED_ROLES.includes(role.title)) return true
+
+  return false
 })
