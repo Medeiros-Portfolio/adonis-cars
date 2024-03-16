@@ -7,24 +7,12 @@
 |
 */
 
-import { middleware } from '#start/kernel'
 import { HttpContext } from '@adonisjs/core/http'
-import app from '@adonisjs/core/services/app'
 import router from '@adonisjs/core/services/router'
 
-router
-  .get('/info', async ({ response }: HttpContext) => {
-    return response.json({
-      environment: app.getEnvironment(),
-      state: app.getState(),
-      info: app.info,
-    })
-  })
-  .use(
-    middleware.auth({
-      guards: ['staff'],
-    })
-  )
+router.get('/health', async ({ response }: HttpContext) => {
+  return response.noContent()
+})
 
 router
   .group(() => {
@@ -32,3 +20,9 @@ router
     router.post('/logout', '#controllers/session_controller.logout')
   })
   .prefix('auth')
+
+router
+  .group(() => {
+    router.post('/', '#controllers/customers_controller.create')
+  })
+  .prefix('customer')
