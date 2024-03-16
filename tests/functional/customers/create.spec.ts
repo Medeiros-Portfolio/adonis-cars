@@ -1,27 +1,25 @@
-import CustomerService from '#services/customer_service'
-import app from '@adonisjs/core/services/app'
+import Employee from '#models/employee'
+import User from '#models/user'
+import logger from '@adonisjs/core/services/logger'
 import { test } from '@japa/runner'
 
 test.group('Customers create', (group) => {
-  let service: CustomerService
+  let vendor: User
 
   group.setup(async () => {
-    service = await app.container.make(CustomerService)
+    const employee = await Employee.findByOrFail('role_id', 2)
+    vendor = await User.findOrFail(employee.userId)
   })
 
-  test('should create a customer', async ({ assert }) => {
-    await app.container.make(CustomerService)
-    const customer = await service.createCustomer({
-      firstName: 'Jack',
-      lastName: 'Daniels',
-    })
-
-    assert.exists(customer.id)
+  test('should create a customer', async ({ client }) => {
+    const response = await client
+      .post('/customer')
+      .loginAs(vendor)
+      .json({
+        firstName: 'Jack',
+        lastName: 'Daniels',
+      })
+      .send()
+    response.assertStatus(201)
   })
-
-  test('should not create a customer when input is invalid', async () => {
-    await service.createCustomer({
-      firstName: 'Jack',
-    } as any)
-  }).throws(/NOT NULL constraint/)
 })

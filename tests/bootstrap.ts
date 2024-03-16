@@ -7,6 +7,7 @@ import { pluginAdonisJS } from '@japa/plugin-adonisjs'
 import testUtils from '@adonisjs/core/services/test_utils'
 import { sessionApiClient } from '@adonisjs/session/plugins/api_client'
 import ace from '@adonisjs/core/services/ace'
+import { authApiClient } from '@adonisjs/auth/plugins/api_client'
 
 /**
  * This file is imported by the "bin/test.ts" entrypoint file
@@ -22,6 +23,7 @@ export const plugins: Config['plugins'] = [
   apiClient(),
   pluginAdonisJS(app),
   sessionApiClient(app),
+  authApiClient(app),
 ]
 
 /**
