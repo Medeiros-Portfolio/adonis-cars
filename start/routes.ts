@@ -26,7 +26,11 @@ router
   .group(() => {
     router.post('/', '#controllers/customers_controller.create')
   })
-  .use(middleware.auth())
+  .use(
+    middleware.auth({
+      guards: ['admin', 'staff'],
+    })
+  )
   .prefix('customer')
 
 router
@@ -52,3 +56,14 @@ router
   })
   .use(middleware.auth())
   .prefix('deal')
+
+router
+  .group(() => {
+    router.post('/', '#controllers/stores_controller.create')
+  })
+  .use(
+    middleware.auth({
+      guards: ['admin'],
+    })
+  )
+  .prefix('store')

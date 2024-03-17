@@ -4,7 +4,7 @@ import { rmSync } from 'node:fs'
 
 export default class Rmsqlite extends BaseCommand {
   static commandName = 'rmsqlite'
-  static description = ''
+  static description = 'Erase the sqlite database used in development'
 
   static options: CommandOptions = {}
 
