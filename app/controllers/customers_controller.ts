@@ -2,7 +2,7 @@
 
 import { createCustomerAbility } from '#abilities/main'
 import CustomerService from '#services/customer_service'
-import { createCustomer } from '#validators/customer'
+import { createCustomer } from '#validators/create_customer'
 import { inject } from '@adonisjs/core'
 import { HttpContext } from '@adonisjs/core/http'
 

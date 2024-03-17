@@ -37,4 +37,8 @@ export default class EmployeeService {
 
     return employee
   }
+
+  async getByUserId(userId: number): Promise<Employee> {
+    return Employee.findByOrFail('user_id', userId)
+  }
 }

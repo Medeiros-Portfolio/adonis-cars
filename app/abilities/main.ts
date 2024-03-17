@@ -49,4 +49,20 @@ export const createEmployeeAbility = Bouncer.ability(async (user: User) => {
   return false
 })
 
+export const searchDealAbility = Bouncer.ability(async (user: User) => {
+  const ALLOWED_ROLES = ['manager', 'accountant']
+
+  const employee = await Employee.findBy('user_id', user.id)
+
+  if (!employee) return false
+
+  const role = await Role.findOrFail(employee.roleId)
+
+  if (ALLOWED_ROLES.includes(role.title)) return true
+
+  return false
+})
+
 export const createCarAbility = createCustomerAbility
+
+export const createDealAbility = createCustomerAbility
