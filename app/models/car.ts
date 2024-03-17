@@ -11,9 +11,6 @@ export default class Car extends BaseModel {
   declare storeId: number
 
   @column()
-  declare dealId: number
-
-  @column()
   declare make: string
 
   @column()

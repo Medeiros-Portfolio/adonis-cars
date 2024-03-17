@@ -48,3 +48,5 @@ export const createEmployeeAbility = Bouncer.ability(async (user: User) => {
 
   return false
 })
+
+export const createCarAbility = createCustomerAbility
