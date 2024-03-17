@@ -35,3 +35,12 @@ router
   })
   .use(middleware.auth())
   .prefix('employee')
+
+router
+  .group(() => {
+    router.post('/', '#controllers/inventory_controller.create')
+    router.get('/', '#controllers/inventory_controller.search')
+    router.get('/available', '#controllers/inventory_controller.available')
+  })
+  .use(middleware.auth())
+  .prefix('inventory')
