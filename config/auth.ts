@@ -14,7 +14,7 @@ const authConfig = defineConfig({
     }),
     admin: basicAuthGuard({
       provider: basicAuthUserProvider({
-        model: () => import('#models/user'),
+        model: () => import('#models/admin'),
       }),
     }),
   },

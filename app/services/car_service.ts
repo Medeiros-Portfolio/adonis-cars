@@ -1,11 +1,21 @@
 import CarAlreadySoldException from '#exceptions/car_already_sold_exception'
 import Car from '#models/car'
+import EmployeeService from '#services/employee_service'
 import { CreateCarDTO, SearchParams } from '#validators/create_car'
+import { inject } from '@adonisjs/core'
 import { ModelPaginatorContract } from '@adonisjs/lucid/types/model'
 
+@inject()
 export default class CarService {
-  async create({ make, model, year, licensePlate, color, storePrice, sellPrice }: CreateCarDTO) {
-    return Car.create({ make, model, year, licensePlate, color, storePrice, sellPrice })
+  constructor(protected employeeService: EmployeeService) {}
+
+  async create(
+    { make, model, year, licensePlate, color, storePrice, sellPrice }: CreateCarDTO,
+    userId: number
+  ) {
+    const { storeId } = await this.employeeService.getByUserId(userId)
+
+    return Car.create({ make, model, year, licensePlate, color, storePrice, sellPrice, storeId })
   }
 
   async getAvailable(page: number = 1): Promise<ModelPaginatorContract<Car>> {

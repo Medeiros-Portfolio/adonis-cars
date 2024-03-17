@@ -8,14 +8,16 @@ import { createCarAbility } from '#abilities/main'
 export default class InventoryController {
   constructor(protected carService: CarService) {}
 
-  async create({ request, response, bouncer }: HttpContext) {
+  async create({ request, response, bouncer, auth }: HttpContext) {
     if (await bouncer.denies(createCarAbility)) {
       return response.unauthorized()
     }
 
     const payload = await request.validateUsing(createCarValidator)
 
-    const car = await this.carService.create(payload)
+    const user = auth.getUserOrFail()
+
+    const car = await this.carService.create(payload, user.id)
 
     return response.created(car)
   }
