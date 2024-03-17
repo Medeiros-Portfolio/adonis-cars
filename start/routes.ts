@@ -44,3 +44,11 @@ router
   })
   .use(middleware.auth())
   .prefix('inventory')
+
+router
+  .group(() => {
+    router.post('/', '#controllers/deals_controller.create')
+    router.get('/', '#controllers/deals_controller.search')
+  })
+  .use(middleware.auth())
+  .prefix('deal')

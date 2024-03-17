@@ -1,3 +1,4 @@
+import CarAlreadySoldException from '#exceptions/car_already_sold_exception'
 import Car from '#models/car'
 import { CreateCarDTO, SearchParams } from '#validators/create_car'
 import { ModelPaginatorContract } from '@adonisjs/lucid/types/model'
@@ -23,6 +24,8 @@ export default class CarService {
 
   async sell(carId: number): Promise<void> {
     const car = await Car.findOrFail(carId)
+
+    if (car.sold) throw new CarAlreadySoldException()
 
     car.sold = true
 
