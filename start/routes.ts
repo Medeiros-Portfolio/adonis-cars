@@ -20,6 +20,13 @@ router
     router.post('/login', '#controllers/session_controller.login')
     router.post('/logout', '#controllers/session_controller.logout')
   })
+  .prefix('session')
+
+router
+  .group(() => {
+    router.post('/forgot_password', '#controllers/auth_controller.forgotPassword')
+    router.post('/confirm_forgot_password', '#controllers/auth_controller.confirmForgotPassword')
+  })
   .prefix('auth')
 
 router
