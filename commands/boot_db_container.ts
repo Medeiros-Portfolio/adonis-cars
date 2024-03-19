@@ -12,7 +12,7 @@ export default class BootDbContainer extends BaseCommand {
   async run() {
     this.animatedLog.start()
 
-    execSync('docker-compose up -d db', { stdio: 'ignore' })
+    execSync('docker-compose up -d redis', { stdio: 'ignore' })
 
     this.animatedLog.update('Just one more second...')
 
