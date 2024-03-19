@@ -4,6 +4,10 @@ import mail from '@adonisjs/mail/services/main'
 import { Queue, Worker } from 'bullmq'
 
 export default class QueueProvider {
+  private _queue!: Queue
+
+  private _worker!: Worker
+
   constructor(protected app: ApplicationService) {}
 
   /**
@@ -27,6 +31,8 @@ export default class QueueProvider {
   async ready() {
     const emailsQueue = new Queue('emails')
 
+    this._queue = emailsQueue
+
     mail.setMessenger((mailer) => {
       return {
         async queue(mailMessage, config) {
@@ -39,7 +45,7 @@ export default class QueueProvider {
       }
     })
 
-    new Worker(
+    this._worker = new Worker(
       'emails',
       async (job) => {
         if (job.name === 'send_email') {
@@ -60,5 +66,8 @@ export default class QueueProvider {
   /**
    * Preparing to shutdown the app
    */
-  async shutdown() {}
+  async shutdown() {
+    await this._queue.close()
+    await this._worker.close()
+  }
 }
