@@ -29,7 +29,12 @@ export default class QueueProvider {
    * The process has been started
    */
   async ready() {
-    const emailsQueue = new Queue('emails')
+    const emailsQueue = new Queue('emails', {
+      connection: {
+        host: env.get('REDIS_HOST'),
+        port: env.get('REDIS_PORT'),
+      },
+    })
 
     this._queue = emailsQueue
 
