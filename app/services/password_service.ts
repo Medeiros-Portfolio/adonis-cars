@@ -21,12 +21,15 @@ export default class PasswordService {
 
     const token = stringHelpers.random(10)
 
+    const ONE_HOUR = '1 hour'
+    const PURPOSE = 'forgot_password'
+
     const encoded = this.messageBuilder.build(
       {
         token,
       },
-      '1 hour',
-      'forgot_password'
+      ONE_HOUR,
+      PURPOSE
     )
 
     const { expiryDate } = JSON.parse(encoded)
@@ -34,7 +37,7 @@ export default class PasswordService {
     const redisKey = email
     const redisValue = token
 
-    await redis.set(redisKey, redisValue)
+    await redis.setex(redisKey, stringHelpers.seconds.parse(ONE_HOUR), redisValue)
 
     const encryptedMessage = encryption.encrypt(encoded)
 
