@@ -35,7 +35,7 @@ router
   })
   .use(
     middleware.auth({
-      guards: ['admin', 'staff'],
+      guards: ['staff'],
     })
   )
   .prefix('customer')

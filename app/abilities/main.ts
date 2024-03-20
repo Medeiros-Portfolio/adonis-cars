@@ -12,6 +12,7 @@
 |
 */
 
+import Admin from '#models/admin'
 import Employee from '#models/employee'
 import Role from '#models/role'
 import User from '#models/user'
@@ -21,7 +22,7 @@ import { Bouncer } from '@adonisjs/bouncer'
  * Delete the following ability to start from
  * scratch
  */
-export const createCustomerAbility = Bouncer.ability(async (user: User) => {
+export const createCustomerAbility = Bouncer.ability(async (user: User | Admin) => {
   const ALLOWED_ROLES = ['vendor', 'manager']
 
   const employee = await Employee.findBy('user_id', user.id)
@@ -35,7 +36,7 @@ export const createCustomerAbility = Bouncer.ability(async (user: User) => {
   return false
 })
 
-export const createEmployeeAbility = Bouncer.ability(async (user: User) => {
+export const createEmployeeAbility = Bouncer.ability(async (user: User | Admin) => {
   const ALLOWED_ROLES = ['manager']
 
   const employee = await Employee.findBy('user_id', user.id)
@@ -49,7 +50,7 @@ export const createEmployeeAbility = Bouncer.ability(async (user: User) => {
   return false
 })
 
-export const searchDealAbility = Bouncer.ability(async (user: User) => {
+export const searchDealAbility = Bouncer.ability(async (user: User | Admin) => {
   const ALLOWED_ROLES = ['manager', 'accountant']
 
   const employee = await Employee.findBy('user_id', user.id)
