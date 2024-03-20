@@ -33,6 +33,7 @@ export default class QueueProvider {
       connection: {
         host: env.get('REDIS_HOST'),
         port: env.get('REDIS_PORT'),
+        password: env.get('REDIS_PASSWORD', ''),
       },
     })
 
@@ -63,6 +64,7 @@ export default class QueueProvider {
         connection: {
           host: env.get('REDIS_HOST'),
           port: env.get('REDIS_PORT'),
+          password: env.get('REDIS_PASSWORD', ''),
         },
       }
     )
