@@ -25,6 +25,9 @@ export default class extends BaseSeeder {
       await car.related('deal').save(deal)
       await customer.related('deal').save(deal)
       await employee.related('deal').save(deal)
+
+      car.sold = true
+      await car.save()
     }
   }
 }
